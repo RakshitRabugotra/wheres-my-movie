@@ -18,6 +18,11 @@ build/
 docs/_build/
 .vscode
 
+# models
+instance/
+*.db
+*.sqlite
+
 # logs
 *.log
 
