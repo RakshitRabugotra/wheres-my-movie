@@ -1,5 +1,23 @@
 from app.utils.responses import APIBaseException
 from email_validator import validate_email as ve, EmailNotValidError
+from logger import logger
+from typing import Dict
+
+
+def get_or_none(dict_obj: Dict, key):
+    """
+    Checks if the given key is valid for the dict object
+    returns The value if found, else None
+    """
+    try:
+        return dict_obj[key]
+    except KeyError:
+        return None
+    except Exception as e:
+        logger.error(
+            f"error while parsing value for dict object: {dict_obj.__str__()}, key: {key}"
+        )
+        return None
 
 
 def validate_none(exception_cls: APIBaseException, **kwargs):
@@ -10,9 +28,10 @@ def validate_none(exception_cls: APIBaseException, **kwargs):
         try:
             assert kwargs.get(field)
         except AssertionError:
-            return exception_cls(msg=f'{field} is required', code=400)
-    
+            return exception_cls(msg=f"{field} is required", code=400)
+
     return None
+
 
 def validate_email(exception_cls: APIBaseException, email: str):
     """
@@ -21,7 +40,6 @@ def validate_email(exception_cls: APIBaseException, email: str):
     try:
         ve(email, check_deliverability=True)
     except EmailNotValidError:
-        return exception_cls(msg=f'{email} is invalid', code=400)
+        return exception_cls(msg=f"{email} is invalid", code=400)
 
     return None
-

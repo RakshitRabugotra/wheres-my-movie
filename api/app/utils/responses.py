@@ -24,7 +24,7 @@ class Response:
             "raw_msg": self.msg,
             "code": self.code,
             "payload": self.payload,
-        }
+        }, self.code
 
 
 class Success(Response):
@@ -46,9 +46,9 @@ class APIBaseException(Response):
 
     @property
     def response(self):
-        resp = super().response
+        resp, _ = super().response
         resp["msg"] = self.prefix + self.msg
-        return resp
+        return resp, self.code
 
 
 class BadRequestException(APIBaseException):
