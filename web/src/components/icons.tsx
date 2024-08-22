@@ -147,6 +147,7 @@ export const SearchIcon = (props: IconSvgProps) => (
  * React icons
  */
 import { BiSolidCameraMovie } from "react-icons/bi"
+import { FaStar } from "react-icons/fa"
 
 export const MovieCamera = ({
   size = 24,
@@ -154,3 +155,10 @@ export const MovieCamera = ({
   height,
   ...props
 }: IconSvgProps) => <BiSolidCameraMovie {...props} size={size} />
+
+export const StarIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => <FaStar {...props} />

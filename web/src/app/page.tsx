@@ -1,10 +1,8 @@
-import { MovieCards } from "@/components/movie-cards"
+import { GenreCards } from "@/components/movie-genre-cards"
+import { RecommendedMovieCards } from "@/components/movie-recommended"
 import { MovieSearchAutocomplete } from "@/components/movie-search"
 import { subtitle, title } from "@/components/primitives"
 import { ThemeSwitch } from "@/components/theme-switch"
-import { GENRES } from "@/lib/constants"
-import { Link } from "@nextui-org/link"
-import { button as buttonStyles } from "@nextui-org/theme"
 
 export default function Home() {
   const user: User = {
@@ -38,7 +36,19 @@ export default function Home() {
 
       {/* The section with the cards */}
       <section className="p-6 w-full">
-        <MovieCards />
+        <GenreCards />
+      </section>
+
+      {/* The section for recommended movies */}
+      <section className="w-full mt-5">
+        <h3
+          className={subtitle({
+            class: "px-6 text-2xl font-medium leading-snug",
+          })}
+        >
+          For you!
+        </h3>
+        <RecommendedMovieCards />
       </section>
     </section>
   )

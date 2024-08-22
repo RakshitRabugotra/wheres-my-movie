@@ -1,21 +1,21 @@
 "use client"
 
 import { GenreProps, GENRES } from "@/lib/constants"
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card"
+import { Card, CardBody, CardFooter } from "@nextui-org/card"
 import { Image } from "@nextui-org/image"
 import React from "react"
 
-export const MovieCards = () => {
+export const GenreCards = () => {
   return (
     <div className="w-full gap-4 grid grid-cols-2 sm:grid-cols-4">
       {GENRES.map((genre, index) => (
-        <MovieCard key={index + genre.title} {...genre} />
+        <GenreCard key={index + genre.title} {...genre} />
       ))}
     </div>
   )
 }
 
-const MovieCard: React.FC<GenreProps> = ({ title, image, color }) => {
+const GenreCard: React.FC<GenreProps> = ({ title, image, color }) => {
   return (
     <Card shadow="sm" isPressable onPress={() => console.log("item pressed")}>
       <CardBody className="overflow-visible p-0">
