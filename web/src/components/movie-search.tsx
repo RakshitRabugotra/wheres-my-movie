@@ -42,7 +42,7 @@ export const MovieSearchAutocomplete = () => {
 
   return (
     <Autocomplete
-      className="max-w-xs select-none"
+      className="select-none max-w-md"
       inputValue={filterText}
       isLoading={list.isLoading}
       items={list.items as Movie[]}
