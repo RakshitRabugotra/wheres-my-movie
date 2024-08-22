@@ -80,13 +80,14 @@ class MovieRecommender:
 
     def search_movies(self, title_query: str, limit=5):
         """
-        Searches the DataFrame for a match in movie title
+        Searches the DataFrame for a match in movie title, considering both similarity
+        and movie popularity/rating.
         """
         movie_titles = self.movies["title"].tolist()
 
         # Use rapidfuzz to find similar movie titles
         similar_titles = rapid_process.extract(
-            title_query, movie_titles, scorer=rapid_fuzz.ratio, limit=limit
+            title_query, movie_titles, scorer=rapid_fuzz.ratio, limit=limit * 2
         )
 
         # Extract corresponding rows from the DataFrame based on the similar titles
@@ -99,10 +100,14 @@ class MovieRecommender:
             lambda x: next(score for title, score, _ in similar_titles if title == x)
         )
 
-        # Sort results by similarity
-        results = results.sort_values(by="similarity", ascending=False)
+        # Rank the results by a combination of similarity score and rating
+        results["ranking_score"] = results["similarity"] * 0.7 + results["rating"] * 0.3
 
-        return results
+        # Sort results by ranking_score
+        results = results.sort_values(by="ranking_score", ascending=False)
+
+        # Limit the number of results to return
+        return results.head(limit)
 
     def __initialize_model(self):
         """
