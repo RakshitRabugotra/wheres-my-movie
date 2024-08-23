@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete"
 import { useAsyncList } from "@react-stately/data"
 import { MovieClientJSON, moviesClient } from "@/lib/fetch-client"
-import { MovieCamera, SearchIcon } from "./icons"
+import { MovieCamera } from "./icons"
 import Link from "next/link"
 
 export const MovieSearchAutocomplete = () => {
@@ -44,6 +44,7 @@ export const MovieSearchAutocomplete = () => {
     <Autocomplete
       className="select-none max-w-md"
       inputValue={filterText}
+      color="primary"
       isLoading={list.isLoading}
       items={list.items as Movie[]}
       label="Select a movie"
@@ -55,7 +56,11 @@ export const MovieSearchAutocomplete = () => {
       onInputChange={setFilterText}
     >
       {item => (
-        <AutocompleteItem key={item.movieId} className="capitalize">
+        <AutocompleteItem
+          key={item.movieId}
+          className="capitalize"
+          textValue={item.title}
+        >
           <Link href={"movie/" + item.movieId}>{item.title}</Link>
         </AutocompleteItem>
       )}

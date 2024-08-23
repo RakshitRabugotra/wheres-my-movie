@@ -29,6 +29,7 @@ const MovieCard: React.FC<Movie> = ({
   genres,
   tags,
   rating,
+  image,
   imdbId,
   tmdbId,
 }) => {
@@ -43,8 +44,8 @@ const MovieCard: React.FC<Movie> = ({
       radius="lg"
       isPressable
       as={Link}
-      href={"/" + movieId}
-      className="border-none z-30"
+      href={"/movie/" + movieId}
+      className="border-none z-30 shadow-large"
       classNames={{
         body: "p-0 max-w-full [&>div]:!max-w-full",
       }}
@@ -55,7 +56,7 @@ const MovieCard: React.FC<Movie> = ({
             alt={title}
             className="object-cover w-full"
             height={800 / 3}
-            src={"/"}
+            src={image || "/"}
             width={200}
             loading="eager"
           />

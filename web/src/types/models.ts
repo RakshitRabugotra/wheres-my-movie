@@ -12,6 +12,7 @@ interface Movie {
   genres: string[]
   tags: string[]
   rating: number
+  image?: string | null
   imdbId: number | null
   tmdbId: number | null
 }
